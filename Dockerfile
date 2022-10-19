@@ -4,8 +4,8 @@ FROM debian:stretch
 RUN echo "$MATTS_ENV"
 RUN echo $GROUP_ENV
 
-RUN --mount=type=secret,id=secretfile,dst=/etc/secrets cat /etc/secrets/secretfile
-RUN --mount=type=secret,id=secretfile,dst=/etc/secrets source /etc/secrets/secretfile && echo $SECRET_SECRET
+RUN --mount=type=secret,id=_env,dst=/etc/secrets/.env cat /etc/secrets/.env
+RUN --mount=type=secret,id=_env,dst=/etc/secrets/.env source /etc/secrets/.env && echo $SECRET_SECRET
 
 WORKDIR /webdis
 COPY webdis ./src
