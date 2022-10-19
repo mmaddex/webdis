@@ -1,10 +1,14 @@
+FROM debian:stretch
+
 ARG MATTS_ENV
 ARG GROUP_ENV
-FROM debian:stretch
+
 RUN echo "$MATTS_ENV"
 RUN echo $GROUP_ENV
+ENV TEST=$GROUP_ENV
+RUN echo $TEST
 
-RUN --mount=type=secret,id=_env,dst=/etc/secrets/.env source /etc/secrets/.env
+RUN --mount=type=secret,id=_env,dst=/etc/secrets/.env cat /etc/secrets/.env
 RUN echo $SECRET_SECRET
 
 WORKDIR /webdis
@@ -15,7 +19,6 @@ RUN  apt-get update && apt-get -y install wget make gcc libevent-dev \
 	
 RUN echo "**** GET READY **** GET SET ****"
 
-RUN echo MATTS_ENV
 RUN echo "$MATTS_ENV"
 RUN if [ "$MATTS_ENV" ]; then echo "HERE IT IS: $MATTS_ENV"; fi
 
