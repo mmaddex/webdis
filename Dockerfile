@@ -1,6 +1,6 @@
 ARG MATTS_ENV
-RUN echo "$MATTS_ENV"
 FROM debian:stretch
+RUN echo "$MATTS_ENV"
 
 WORKDIR /webdis
 COPY webdis ./src
