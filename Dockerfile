@@ -10,6 +10,7 @@ RUN  apt-get update && apt-get -y install wget make gcc libevent-dev \
 	
 RUN echo "**** GET READY **** GET SET ****"
 
+RUN echo MATTS_ENV
 RUN echo "$MATTS_ENV"
 RUN if [ "$MATTS_ENV" ]; then echo "HERE IT IS: $MATTS_ENV"; fi
 
