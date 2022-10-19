@@ -5,8 +5,14 @@ ARG GROUP_ENV
 
 RUN echo "$MATTS_ENV"
 RUN echo $GROUP_ENV
+ARG TEST
+ARG SECOND_TEST
+
 ENV TEST=$GROUP_ENV
+ENV SECOND_TEST=hay
+
 RUN echo $TEST
+RUN echo $SECOND_TEST
 
 RUN --mount=type=secret,id=_env,dst=/etc/secrets/.env cat /etc/secrets/.env
 RUN echo $SECRET_SECRET
