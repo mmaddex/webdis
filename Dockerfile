@@ -14,7 +14,7 @@ ENV SECOND_TEST=hay
 RUN echo $TEST
 RUN echo $SECOND_TEST
 
-RUN --mount=type=secret,id=sec,dst=/etc/secrets/sec cat /etc/secrets/sec
+RUN --mount=type=secret,id=secret_file,dst=/etc/secrets/secret.file cat /etc/secrets/secret.file
 RUN echo $SECRET_SECRET
 
 WORKDIR /webdis
