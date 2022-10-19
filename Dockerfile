@@ -1,20 +1,29 @@
 FROM debian:stretch
 
-ARG MATTS_ENV
 ARG GROUP_ENV
+ARG GROUP_ENV_PLAIN
+ARG GROUP_ENV_SPACES
 
-RUN echo "$MATTS_ENV"
+ARG SERVICE_ENV
+ARG SERVICE_ENV_SPACES
+ARG SERVICE_ENV_PLAIN
+
+RUN echo "GROUP_ENV"
 RUN echo $GROUP_ENV
-ARG TEST
-ARG SECOND_TEST
+RUN echo "GROUP_ENV_SPACES"
+RUN echo $GROUP_ENV_SPACES
+RUN echo "GROUP_ENV_PLAIN"
+RUN echo $GROUP_ENV_PLAIN
 
-ENV TEST=$GROUP_ENV
-ENV SECOND_TEST=hay
+RUN echo "SERVICE_ENV"
+RUN echo $SERVICE_ENV
+RUN echo "SERVICE_ENV_SPACES"
+RUN echo $SERVICE_ENV_SPACES
+RUN echo "SERVICE_ENV_PLAIN"
+RUN echo $SERVICE_ENV_PLAIN
 
-RUN echo $TEST
-RUN echo $SECOND_TEST
 
-RUN --mount=type=secret,id=secret_file,dst=/etc/secrets/secret.file source /etc/secrets/secret.file
+RUN --mount=type=secret,id=secret_file,dst=/etc/secrets/secret.file cat /etc/secrets/secret.file
 RUN echo $SECRET_SECRET
 
 WORKDIR /webdis
@@ -22,11 +31,6 @@ COPY webdis ./src
 COPY webdis-wrapper.sh .
 RUN  apt-get update && apt-get -y install wget make gcc libevent-dev \
 	&& cd src && make && cp /webdis/src/webdis /webdis/webdis && rm -rf /webdis/src
-	
-RUN echo "**** GET READY **** GET SET ****"
-
-RUN echo "$MATTS_ENV"
-RUN if [ "$MATTS_ENV" ]; then echo "HERE IT IS: $MATTS_ENV"; fi
 
 ENV PATH=/webdis:$PATH
 
