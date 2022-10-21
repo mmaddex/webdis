@@ -17,7 +17,7 @@ RUN echo $SERVICE_ENV_SPACES
 RUN echo $SERVICE_ENV_PLAIN
 
 
-RUN --mount=type=secret,id=secret_file,dst=/etc/secrets/secret.file cat /etc/secrets/secret.file
+RUN --mount=type=secret,id=secret_file,dst=/etc/secrets/secret.file . /etc/secrets/secret.file
 RUN echo $SECRET_SECRET
 
 WORKDIR /webdis
