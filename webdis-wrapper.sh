@@ -33,4 +33,5 @@ cat <<EOF > "$config_file"
 }
 EOF
 
+echo $withequals
 exec webdis "$config_file"
